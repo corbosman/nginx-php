@@ -14,7 +14,7 @@ script:
     (
       set -Eeuo pipefail
       set -x
-      docker build -t "$image" .
+      docker build -t "$image" --build-arg PHP_VERSION=${PHP_VERSION} .
     )
 
 after_script:
