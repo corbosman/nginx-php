@@ -20,3 +20,11 @@ script:
       docker tag ${IMAGE} ${HUB_USERNAME}/${IMAGE}
       docker push ${HUB_USERNAME}/${IMAGE}
     )
+  - |
+    if [ ${PHP_VERSION} == "7.3" ]; then
+      docker tag ${IMAGE} ${HUB_USERNAME}/nginx-php:7;
+      docker tag ${IMAGE} ${HUB_USERNAME}/nginx-php:latest;
+      docker push ${HUB_USERNAME}/nginx-php:7;
+      docker push ${HUB_USERNAME}/nginx-php:latest;
+    fi
+
