@@ -8,7 +8,7 @@ env:
 before_script:
   - env | sort
   - IMAGE="nginx-php:${PHP_VERSION}"
-  - docker pull ${IMAGE} || true
+  - docker pull ${HUB_USERNAME}/${IMAGE} || true
 
 script:
   - |
