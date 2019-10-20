@@ -24,19 +24,15 @@ script:
     (
     set -Eeuo pipefail
     set -x
-
-    if [ $TRAVIS_BRANCH == 'master' ]; then
+    if [ ${TRAVIS_BRANCH} == 'master' ]; then
       docker login -u ${HUB_USERNAME} -p ${HUB_PASSWORD}
       docker tag ${IMAGE} ${HUB_IMAGE}
       docker push ${HUB_IMAGE}
-
       if [ ${PHP_VERSION} == "7.3" ]; then
         docker tag ${IMAGE} ${HUB_USERNAME}/nginx-php:7;
         docker tag ${IMAGE} ${HUB_USERNAME}/nginx-php:latest;
         docker push ${HUB_USERNAME}/nginx-php:7;
         docker push ${HUB_USERNAME}/nginx-php:latest;
       fi
-
     fi
     )
-
