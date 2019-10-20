@@ -1,15 +1,20 @@
 language: bash
 services: docker
 
+env:
+  - PHP_VERSION=7.2
+  - PHP_VERSION=7.3
+
 before_script:
   - env | sort
+  - image="nginx-php:${PHP_VERSION}-alpine"
 
 script:
   - |
     (
       set -Eeuo pipefail
       set -x
-      docker build .
+      docker build -t "$image" .
     )
 
 after_script:
