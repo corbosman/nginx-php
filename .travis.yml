@@ -8,18 +8,19 @@ env:
 before_script:
   - env | sort
   - IMAGE="nginx-php:${PHP_VERSION}"
-  - docker pull ${HUB_USERNAME}/${IMAGE} || true
+  - HUB_IMAGE=${HUB_USERNAME}/${IMAGE}
 
 script:
+  - docker pull ${HUB_IMAGE} || true
   - |
     (
       set -Eeuo pipefail
       set -x
-      docker build -t ${IMAGE} --build-arg PHP_VERSION=${PHP_VERSION} --pull --cache-from ${IMAGE} .
+      docker build -t ${IMAGE} --build-arg PHP_VERSION=${PHP_VERSION} --pull --cache-from ${HUB_IMAGE} .
       docker images
       echo ${HUB_PASSWORD} | docker login -u ${HUB_USERNAME} --password-stdin
-      docker tag ${IMAGE} ${HUB_USERNAME}/${IMAGE}
-      docker push ${HUB_USERNAME}/${IMAGE}
+      docker tag ${IMAGE} ${HUB_IMAGE}
+      docker push ${HUB_IMAGE}
     )
   - |
     if [ ${PHP_VERSION} == "7.3" ]; then
