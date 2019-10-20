@@ -18,7 +18,7 @@ script:
       set -x
       docker build -t ${IMAGE} --build-arg PHP_VERSION=${PHP_VERSION} --pull --cache-from ${HUB_IMAGE} .
       docker images
-      echo ${HUB_PASSWORD} | docker login -u ${HUB_USERNAME} --password-stdin
+      docker login -u ${HUB_USERNAME} -p ${HUB_PASSWORD}
       docker tag ${IMAGE} ${HUB_IMAGE}
       docker push ${HUB_IMAGE}
     )

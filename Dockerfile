@@ -65,5 +65,7 @@ COPY s6/start-nginx.sh /etc/services.d/nginx/run
 COPY s6/start-fpm.sh /etc/services.d/php_fpm/run
 RUN chmod -R 755 /etc/services.d/
 
+WORKDIR /app
+
 EXPOSE 80
 CMD ["/init"]
