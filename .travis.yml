@@ -7,14 +7,15 @@ env:
 
 before_script:
   - env | sort
-  - IMAGE="nginx-php:${PHP_VERSION}-alpine"
+  - IMAGE="nginx-php:${PHP_VERSION}"
+  - docker pull ${IMAGE} || true
 
 script:
   - |
     (
       set -Eeuo pipefail
       set -x
-      docker build -t ${IMAGE} --build-arg PHP_VERSION=${PHP_VERSION} .
+      docker build -t ${IMAGE} --build-arg PHP_VERSION=${PHP_VERSION} --pull --cache-from ${IMAGE} .
       docker images
       echo ${HUB_PASSWORD} | docker login -u ${HUB_USERNAME} --password-stdin
       docker tag ${IMAGE} ${HUB_USERNAME}/${IMAGE}
