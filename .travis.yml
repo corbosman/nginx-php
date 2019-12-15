@@ -18,7 +18,7 @@ script:
     (
       set -Eeuo pipefail
       set -x
-      docker build -t ${IMAGE} --build-arg PHP_VERSION=${PHP_VERSION} --pull --cache-from ${HUB_IMAGE} .
+      docker build -t ${IMAGE} --build-arg PHP_VERSION=${PHP_VERSION} --build-arg GD={$GD} --pull --cache-from ${HUB_IMAGE} .
       docker images
     )
   - |
