@@ -1,12 +1,15 @@
 ARG PHP_VERSION=7.3
+ARG GD="--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
 FROM composer:1 as composer
 
 ARG PHP_VERSION
+ARG GD
 FROM php:${PHP_VERSION}-fpm-alpine
 
 ########################################################################################################################
-# COMPOSER                                                                                                                #
+# COMPOSER                                                                                                             #
 ########################################################################################################################
+ARG GD
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 ########################################################################################################################
@@ -16,7 +19,7 @@ RUN mkdir -p /usr/share/man/man1 /usr/share/man/man7 /etc/xs4all  && \
     apk add --update --no-cache --virtual .build-deps icu-dev jpeg-dev libjpeg-turbo-dev libpng-dev libzip-dev \
              postgresql-dev tzdata && \
     apk --no-cache add postgresql-client libpq libpng libjpeg icu-libs libzip tzdata bash curl && \
-    docker-php-ext-configure gd --with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd && \
+    docker-php-ext-configure gd ${GD} && \
     docker-php-ext-install bcmath exif gd intl mysqli opcache pcntl pdo pdo_mysql pdo_pgsql pgsql sockets zip && \
     cp /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime && \
     echo "Europe/Amsterdam" >  /etc/timezone && \
