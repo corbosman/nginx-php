@@ -24,7 +24,10 @@ RUN mkdir -p /usr/share/man/man1 /usr/share/man/man7 /etc/xs4all  && \
     cp /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime && \
     echo "Europe/Amsterdam" >  /etc/timezone && \
     apk del .build-deps && \
-    rm -rf /usr/src
+    rm -rf /usr/src && \
+    mv "${PHP_INI_DIR}/php.ini-production" "${PHP_INI_DIR}/php.ini"
+
+COPY php/limits.ini ${PHP_INI_DIR}/conf.d/
 
 ########################################################################################################################
 # NGINX                                                                                                                #
