@@ -3,9 +3,9 @@ services: docker
 
 env:
   - PHP_VERSION=7.1 GD="--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
-  #- PHP_VERSION=7.2 GD="--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
-  #- PHP_VERSION=7.3 GD="--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
-  #- PHP_VERSION=7.4 GD=""
+  - PHP_VERSION=7.2 GD="--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
+  - PHP_VERSION=7.3 GD="--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
+  - PHP_VERSION=7.4 GD=""
 
 before_script:
   - env | sort
@@ -34,8 +34,8 @@ script:
         docker tag nginx-php:${PHP_VERSION_MINOR} ${HUB_USERNAME}/nginx-php:${PHP_VERSION_MINOR}
         docker push ${HUB_USERNAME}/nginx-php:${PHP_VERSION_MINOR}
         if [ ${PHP_VERSION} == "7.4" ]; then
-          docker tag ${IMAGE} ${HUB_USERNAME}/nginx-php:7;
-          docker tag ${IMAGE} ${HUB_USERNAME}/nginx-php:latest;
+          docker tag nginx-php:${PHP_VERSION} ${HUB_USERNAME}/nginx-php:7;
+          docker tag nginx-php:${PHP_VERSION} ${HUB_USERNAME}/nginx-php:latest;
           docker push ${HUB_USERNAME}/nginx-php:7;
           docker push ${HUB_USERNAME}/nginx-php:latest;
         fi
