@@ -26,6 +26,7 @@ script:
       set -Eeuo pipefail
       set -x
       PHP_MINOR=`docker run corbosman/${IMAGE} php -v | grep ^PHP | cut -d' ' -f2`
+      echo ${PHP_MINOR}
     )
   - |
     (
