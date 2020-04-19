@@ -26,7 +26,8 @@ script:
       set -Eeuo pipefail
       set -x
       PHP_MINOR=`docker run corbosman/${IMAGE} php -v | grep ^PHP | cut -d' ' -f2`
-      echo ${PHP_MINOR}
+      docker build -t nginx-php/${PHP_MINOR} PHP_VERSION=${PHP_MINOR} --build-arg GD="${GD}" --pull --cache-from ${HUB_IMAGE} .
+      docker images
     )
   - |
     (
