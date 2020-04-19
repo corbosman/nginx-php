@@ -27,22 +27,17 @@ script:
       PHP_VERSION_MINOR=`docker run corbosman/${IMAGE} php -v | grep ^PHP | cut -d' ' -f2`
       docker build -t nginx-php:${PHP_VERSION_MINOR} --build-arg PHP_VERSION=${PHP_VERSION_MINOR} --build-arg GD="${GD}" --pull --cache-from ${HUB_IMAGE} .
       docker images
-    )
-  - |
-    (
-    set -Eeuo pipefail
-    set -x
-    if [ ${TRAVIS_BRANCH} == 'master' ]; then
-      docker login -u ${HUB_USERNAME} -p ${HUB_PASSWORD}
-      docker tag nginx-php:${PHP_VERSION} ${HUB_USERNAME}/nginx-php:${PHP_VERSION}
-      docker push ${HUB_USERNAME}/nginx-php:${PHP_VERSION}
-      docker tag nginx-php:${PHP_VERSION_MINOR} ${HUB_USERNAME}/nginx-php:${PHP_VERSION_MINOR}
-      docker push ${HUB_USERNAME}/nginx-php:${PHP_VERSION_MINOR}
-      if [ ${PHP_VERSION} == "7.4" ]; then
-        docker tag ${IMAGE} ${HUB_USERNAME}/nginx-php:7;
-        docker tag ${IMAGE} ${HUB_USERNAME}/nginx-php:latest;
-        docker push ${HUB_USERNAME}/nginx-php:7;
-        docker push ${HUB_USERNAME}/nginx-php:latest;
+      if [ ${TRAVIS_BRANCH} == 'master' ]; then
+        docker login -u ${HUB_USERNAME} -p ${HUB_PASSWORD}
+        docker tag nginx-php:${PHP_VERSION} ${HUB_USERNAME}/nginx-php:${PHP_VERSION}
+        docker push ${HUB_USERNAME}/nginx-php:${PHP_VERSION}
+        docker tag nginx-php:${PHP_VERSION_MINOR} ${HUB_USERNAME}/nginx-php:${PHP_VERSION_MINOR}
+        docker push ${HUB_USERNAME}/nginx-php:${PHP_VERSION_MINOR}
+        if [ ${PHP_VERSION} == "7.4" ]; then
+          docker tag ${IMAGE} ${HUB_USERNAME}/nginx-php:7;
+          docker tag ${IMAGE} ${HUB_USERNAME}/nginx-php:latest;
+          docker push ${HUB_USERNAME}/nginx-php:7;
+          docker push ${HUB_USERNAME}/nginx-php:latest;
+        fi
       fi
-    fi
     )
