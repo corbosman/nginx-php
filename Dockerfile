@@ -66,7 +66,7 @@ COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 # supervisor                                                                                                                #
 ########################################################################################################################
 ADD https://github.com/just-containers/s6-overlay/releases/download/v1.22.1.0/s6-overlay-amd64.tar.gz /tmp/
-RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
+RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C / && rm -f /tmp/s6-overlay-amd64.tar.gz
 COPY s6/start-nginx.sh /etc/services.d/nginx/run
 COPY s6/start-fpm.sh /etc/services.d/php_fpm/run
 RUN chmod -R 755 /etc/services.d/
