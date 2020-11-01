@@ -7,6 +7,7 @@ This is a docker image that combines nginx and php in a single image. This is mu
 
 # Supported tags
 
+* <code>[8.0-rc](https://github.com/corbosman/nginx-php/blob/master/Dockerfile)</code>, <code>[8](https://github.com/corbosman/nginx-php/blob/master/Dockerfile)</code>
 * <code>[7.4](https://github.com/corbosman/nginx-php/blob/master/Dockerfile)</code>, <code>[7](https://github.com/corbosman/nginx-php/blob/master/Dockerfile)</code>, <code>[latest](https://github.com/corbosman/nginx-php/blob/master/Dockerfile)</code>
 * <code>[7.3](https://github.com/corbosman/nginx-php/blob/master/Dockerfile)</code>
 * <code>[7.2](https://github.com/corbosman/nginx-php/blob/master/Dockerfile)</code>

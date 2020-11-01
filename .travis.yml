@@ -25,7 +25,7 @@ script:
     (
       set -Eeuo pipefail
       set -x
-      PHP_VERSION_MINOR=`docker run corbosman/${IMAGE} php -v | grep ^PHP | cut -d' ' -f2`
+      PHP_VERSION_MINOR=`docker run ${IMAGE} php -v | grep ^PHP | cut -d' ' -f2`
       docker build -t nginx-php:${PHP_VERSION_MINOR} --build-arg PHP_VERSION=${PHP_VERSION_MINOR} --build-arg GD="${GD}" --pull --cache-from ${HUB_IMAGE} .
       docker images
       if [ ${TRAVIS_BRANCH} == 'master' ]; then
