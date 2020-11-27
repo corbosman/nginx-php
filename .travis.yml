@@ -6,7 +6,7 @@ env:
   - PHP_VERSION=7.2 GD="--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
   - PHP_VERSION=7.3 GD="--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
   - PHP_VERSION=7.4 GD=""
-  - PHP_VERSION=8.0-rc GD=""
+  - PHP_VERSION=8.0 GD=""
 
 before_script:
   - env | sort
@@ -40,7 +40,7 @@ script:
           docker push ${HUB_USERNAME}/nginx-php:7;
           docker push ${HUB_USERNAME}/nginx-php:latest;
         fi
-        if [ ${PHP_VERSION} == "8.0-rc" ]; then
+        if [ ${PHP_VERSION} == "8.0" ]; then
           docker tag nginx-php:${PHP_VERSION} ${HUB_USERNAME}/nginx-php:8;
           docker push ${HUB_USERNAME}/nginx-php:8;
         fi
