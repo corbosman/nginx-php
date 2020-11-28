@@ -55,4 +55,6 @@ jobs:
         if: matrix.php == '7.4'
         run: |
           docker tag nginx-php:${{matrix.php}} corbosman/nginx-php:7
-          docker tag nginx-php:${{matrix.php}} corbosman/nginx-php:latest   
+          docker tag nginx-php:${{matrix.php}} corbosman/nginx-php:latest
+          docker push corbosman/nginx-php:7
+          docker push corbosman/nginx-php:latest
