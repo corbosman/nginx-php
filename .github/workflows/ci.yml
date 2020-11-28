@@ -28,7 +28,10 @@ jobs:
       - name: Pull Cache Image
         run: docker pull corbosman/nginx-php:${{matrix.php}} || true
 
-      
       - name: Build PHP${{matrix.php}} Image
         run: docker build -t nginx-php:${{matrix.php}} --build-arg PHP_VERSION=${{matrix.php}} --build-arg GD="${{matrix.gd}}" --pull --cache-from corbosman/nginx-php:${{matrix.php}} .
 
+      - name: Build Minor Version For PHP${{matrix.php}}
+        run: |
+          PHP_VERSION_MINOR=`docker run nginx-php:${{matrix.php}} php -v | grep ^PHP | cut -d' ' -f2`
+          docker build -t nginx-php:${{PHP_VERSION_MINOR}} --build-arg  PHP_VERSION=${{matrix.php}} --build-arg GD="${{matrix.gd}}" --pull --cache-from corbosman/nginx-php:${{matrix.php}} .
