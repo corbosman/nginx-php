@@ -9,6 +9,10 @@ jobs:
 
     runs-on: ubuntu-latest
     
+    defaults:
+      run:
+        shell: bash
+    
     strategy:
       matrix:
         include:
