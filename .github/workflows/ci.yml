@@ -42,5 +42,5 @@ jobs:
           docker build -t nginx-php:${PHP_VERSION_MINOR} --build-arg PHP_VERSION=${PHP_VERSION_MINOR} --build-arg GD="${{matrix.gd}}" --pull --cache-from corbosman/nginx-php:${{matrix.php}} .
 
       - name: Push Images
-        if: github.ref == 'master'
+        if: github.ref == 'workflow'
         run: echo master
