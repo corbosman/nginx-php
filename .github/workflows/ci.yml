@@ -1,0 +1,32 @@
+name: Publish Docker Image
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  push-to-docker-hub:
+
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        include:
+           - php: 7.1
+             gd: "--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
+           - php: 7.2
+             gd: "--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
+           - php: 7.3
+             gd: "--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
+           - php: 7.4
+             gd: ""
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+        
+      - name: Pull Cache Image
+        run: docker pull nginx-php:${{matrix.php}} || true
+
+      
+      
