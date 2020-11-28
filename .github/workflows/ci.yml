@@ -45,14 +45,14 @@ jobs:
       - name: Push Images
         if: github.ref == 'refs/heads/workflow'
         run: |
-          docker login -u corbosman -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+          echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u corbosman --password-stdin
           docker tag nginx-php:${{matrix.php}} corbosman/nginx-php:${{matrix.php}}
           docker push corbosman/nginx-php:${{matrix.php}}
           docker tag nginx-php:${PHP_VERSION_MINOR} corbosman/nginx-php:${PHP_VERSION_MINOR}
           docker push corbosman/nginx-php:${PHP_VERSION_MINOR}
           
       - name: Push 7 Image
-        if: ${{matrix.php}} == '7.4'
+        if: matrix.php == '7.4'
         run: |
           docker tag nginx-php:${{matrix.php}} corbosman/nginx-php:7
           docker tag nginx-php:${{matrix.php}} corbosman/nginx-php:latest   
