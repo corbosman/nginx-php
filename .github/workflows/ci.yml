@@ -40,3 +40,7 @@ jobs:
           PHP_VERSION_MINOR=`docker run nginx-php:${{matrix.php}} php -v | grep ^PHP | cut -d' ' -f2`
           echo Building version ${PHP_VERSION_MINOR}
           docker build -t nginx-php:${PHP_VERSION_MINOR} --build-arg PHP_VERSION=${PHP_VERSION_MINOR} --build-arg GD="${{matrix.gd}}" --pull --cache-from corbosman/nginx-php:${{matrix.php}} .
+
+      - name: Push Images
+        if: github.ref == 'master'
+        run: echo master
