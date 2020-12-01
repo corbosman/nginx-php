@@ -1,4 +1,4 @@
-name: Publish Docker Image
+name: Publish Docker Images
 
 on:
   push:
@@ -25,6 +25,8 @@ jobs:
            - php: 7.3
              gd: "--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
            - php: 7.4
+             gd: ""
+           - php: 8.0
              gd: ""
 
     steps:
