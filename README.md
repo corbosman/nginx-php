@@ -3,7 +3,7 @@
 
 [![Build Status](https://travis-ci.org/corbosman/nginx-php.svg?branch=master)](https://travis-ci.org/corbosman/nginx-php)
 
-This is a docker image that combines nginx and php in a single image. This is much faster than running each image separately. It is optimised for use in laravel projects.  Right now it is only published as an alpine image. 
+This is a docker image that combines nginx and php in a single image. This is much faster than running each image separately. It is optimised for use in laravel projects.  Right now it is only published as an alpine image. If you're interested in running this image with Laravel's scheduler, migration and Horizon, then check out my image corbosman/laravel-nginx-php. 
 
 # Supported tags
 

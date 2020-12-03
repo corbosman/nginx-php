@@ -59,6 +59,12 @@ jobs:
         if: github.ref == 'refs/heads/master' && matrix.php == '7.4'
         run: |
           docker tag nginx-php:${{matrix.php}} corbosman/nginx-php:7
-          docker tag nginx-php:${{matrix.php}} corbosman/nginx-php:latest
           docker push corbosman/nginx-php:7
-          docker push corbosman/nginx-php:latest
+
+      - name: Push 8 Image
+        if: github.ref == 'refs/heads/master' && matrix.php == '8.0'
+        run: |
+            docker tag nginx-php:${{matrix.php}} corbosman/nginx-php:8
+            docker tag nginx-php:${{matrix.php}} corbosman/nginx-php:latest
+            docker push corbosman/nginx-php:8
+            docker push corbosman/nginx-php:latest
