@@ -26,7 +26,7 @@ jobs:
              gd: "--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
            - php: 7.4
              gd: ""
-           - php: 8.0
+           - php: "8.0"
              gd: ""
 
     steps:
