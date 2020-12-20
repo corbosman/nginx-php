@@ -17,8 +17,10 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 ########################################################################################################################
 RUN mkdir -p /usr/share/man/man1 /usr/share/man/man7 /etc/xs4all  && \
     apk add --update --no-cache --virtual .build-deps icu-dev jpeg-dev libjpeg-turbo-dev libpng-dev libzip-dev \
-             postgresql-dev tzdata && \
+             postgresql-dev tzdata autoconf alpine-sdk && \
     apk --no-cache add postgresql-client libpq libpng libjpeg icu-libs libzip tzdata bash curl && \
+    pecl channel-update pecl.php.net && \
+    pecl install redis && docker-php-ext-enable redis && \
     docker-php-ext-configure gd ${GD} && \
     docker-php-ext-install bcmath exif gd intl mysqli opcache pcntl pdo pdo_mysql pdo_pgsql pgsql sockets zip && \
     cp /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime && \
