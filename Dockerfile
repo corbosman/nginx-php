@@ -1,6 +1,6 @@
 ARG PHP_VERSION=7.4
 ARG GD="--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
-FROM composer:1 as composer
+FROM composer:2 as composer
 
 ARG PHP_VERSION
 ARG GD
