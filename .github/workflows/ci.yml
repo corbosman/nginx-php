@@ -18,12 +18,6 @@ jobs:
     strategy:
       matrix:
         include:
-           - php: 7.1
-             gd: "--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
-           - php: 7.2
-             gd: "--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
-           - php: 7.3
-             gd: "--with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd"
            - php: 7.4
              gd: "--with-jpeg"
            - php: "8.0"
