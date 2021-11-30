@@ -23,6 +23,8 @@ jobs:
              gd: "--with-jpeg"
            - php: "8.0"
              gd: "--with-jpeg"
+           - php: "8.1"
+             gd: "--with-jpeg"
 
     steps:
       - name: Check out the repository
@@ -57,7 +59,7 @@ jobs:
           docker push corbosman/nginx-php:7
 
       - name: Push 8 Image
-        if: github.ref == 'refs/heads/master' && matrix.php == '8.0'
+        if: github.ref == 'refs/heads/master' && matrix.php == '8.1'
         run: |
             docker tag nginx-php:${{matrix.php}} corbosman/nginx-php:8
             docker tag nginx-php:${{matrix.php}} corbosman/nginx-php:latest
