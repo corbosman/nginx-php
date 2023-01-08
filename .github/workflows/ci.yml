@@ -19,8 +19,6 @@ jobs:
     strategy:
       matrix:
         include:
-           - php: "7.4"
-             gd: "--with-jpeg"
            - php: "8.0"
              gd: "--with-jpeg"
            - php: "8.1"
@@ -30,7 +28,7 @@ jobs:
 
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Pull Cache Image
         run: docker pull corbosman/nginx-php:${{matrix.php}} || true
@@ -54,14 +52,8 @@ jobs:
           docker tag nginx-php:${PHP_VERSION_MINOR} corbosman/nginx-php:${PHP_VERSION_MINOR}
           docker push corbosman/nginx-php:${PHP_VERSION_MINOR}
 
-      - name: Push 7 Image
-        if: github.ref == 'refs/heads/master' && matrix.php == '7.4'
-        run: |
-          docker tag nginx-php:${{matrix.php}} corbosman/nginx-php:7
-          docker push corbosman/nginx-php:7
-
       - name: Push 8 Image
-        if: github.ref == 'refs/heads/master' && matrix.php == '8.1'
+        if: github.ref == 'refs/heads/master' && matrix.php == '8.2'
         run: |
             docker tag nginx-php:${{matrix.php}} corbosman/nginx-php:8
             docker tag nginx-php:${{matrix.php}} corbosman/nginx-php:latest
